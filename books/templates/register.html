@@ -1,0 +1,87 @@
+
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Book Club!-Reading book with a cup of coffee~</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Friends Book Reading Chatting" />
+    <meta name="keywords" content="Book club" />
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" rel="stylesheet">
+    <style type="text/css">
+    div.span6{
+       height:400px;
+       overflow:auto;
+    }
+    </style>
+
+
+  </head>
+  
+  <body>
+        <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <h1>
+            Book Club <span class="label"><a href="/">HOME</a></span>
+          </h1>
+          <h5>---Welcome {{request.user.username}}!</h5>
+        </div>
+      </div>
+      </div>
+  <form class="form-horizontal"  action="" method = "POST">
+  {% csrf_token %}
+    <fieldset>
+      <div id="legend" class="">
+        <legend class="">Register</legend>
+      </div>
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">User Name</label>
+          <div class="controls">
+            <input type="text" name="username" placeholder="" class="input-xlarge" maxlength="30" minlength="6" required="required" >
+            <p class="help-block" required="required" ></p>
+          </div>
+          {%if username_error%}
+          <p>The name has been used.</p>
+          {%endif%}
+        </div>
+
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">Password</label>
+          <div class="controls">
+            <input type="password" name="password" placeholder="" class="input-xlarge" minlength="6" required="required" >
+            <p class="help-block" required="required" ></p>
+          </div>
+        </div>
+
+    
+
+    <div class="control-group">
+
+          <!-- Text input-->
+          <label class="control-label" for="input01">Email</label>
+          <div class="controls">
+            <input type="text" name="pre_email" placeholder="" class="input-xlarge" minlength="1" required="required" ><p>@</p>
+            <input type="text" name="post_email" placeholder="" class="input-xlarge" minlength="1" required="required" >
+            <p class="help-block"></p>
+          </div>
+        </div><div class="control-group">
+          <label class="control-label"></label>
+
+          <!-- Button -->
+          <div class="controls">
+            <input  value = "Register"  name = "submit" class="btn" type="submit"/>
+          </div>
+        </div>
+
+    
+
+    </fieldset>
+  </form>
+
+    </body>
+</html>

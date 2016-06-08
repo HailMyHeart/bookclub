@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+	{% block content %}
+	<div class="row-fluid">
+		<div class="span12">
+			<blockquote>
+				<p>
+					{{remark.remark_title}}
+				</p> 
+			</blockquote>
+			<ul>
+				<li><a href="/book/{{remark.book_id}}">
+					Book:{{remark.book_name}}</a>
+				</li>
+				<li>
+					Date Time:{{remark.remark_date}}
+				</li>
+				<li>
+					Author:{{remark.author_name}}
+				</li>
+			</ul>
+			<dl>
+			
+				<dd>
+					{{remark.remark_content}}
+				</dd>
+			</dl>
+		</div>
+	</div>
+{%endblock%}

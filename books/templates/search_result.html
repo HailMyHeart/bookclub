@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+	{% block content %}
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<table class="table table-hover">
+				<tbody>
+				{%for i in result%}
+					{%if forloop.counter|divisibleby:2%}
+					<tr class="success">
+					{%else%}
+					<tr class="info">
+					{%endif%}
+					{%ifequal token 'profile'%}
+
+						<td><a href="/{{token}}/{{i.username}}">
+							{{i.username}}</a>
+						</td>
+					{%else%}
+						{%ifequal token 'book'%}
+						<td><a href="/{{token}}/{{i.book_id}}">
+							{{i.book_name}}</a>
+						</td>
+						<td >
+							{{i.author_name}}
+						</td>
+						{%else%}
+						<td><a href="/{{token}}/{{i.group_id}}">
+							{{i.group_name}}</a>
+						</td>
+						<td >
+							{{i.builder_name}}
+						</td>	
+						{%endifequal%}
+					{%endifequal %}
+					</tr>
+				{%endfor%}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{%endblock%}

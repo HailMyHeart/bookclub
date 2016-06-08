@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+	{% block content %}
+	<div class="row-fluid">
+		<div class="span6">
+			<h3>
+				Profile
+			</h3>
+			<ul>
+				<li>
+					User Name:{{user.username}}
+				</li>
+				<li>
+					E_mail:{{user.email}}
+				</li>
+				<li>
+					Last Login:{{user.last_login}}
+				</li>
+			</ul>
+			{%ifequal request.user.username user.username%}
+			<li>Reset Your Password:
+			<form  action="" method = "POST">
+			{% csrf_token %}
+			<p>
+				<input type="password" name="password"  minlength="1" required="required" />
+			</p>
+			<p>
+				<input  value = "Submit"  name = "change_password" class="btn" type="submit">
+
+			</p>
+			</form>
+			{%if password_error%}
+			<p>Please enter the password.</p>
+			{%endif%}
+			</li>
+			{%endifequal%}
+		</div>
+		<div class="span6">
+			<h3>
+				Remarks
+			</h3>
+			
+			
+			<table class="table">
+
+				<thead>
+					<tr>
+						<th>
+							Remark
+						</th>
+						{%ifequal request.user.username user.username%}
+						<th>
+							Operation
+						</th>
+						{%endifequal%}
+
+					</tr>
+				</thead>
+				<tbody>
+				{%for remark_item in remark_list%}
+					{%if forloop.counter|divisibleby:2%}
+					<tr class="success">
+					{%else%}
+					<tr class="info">
+					{%endif%}
+						<td><a href="/remark/{{remark_item.remark_id}}">
+							{{remark_item.remark_name}}</a>
+						</td>
+						{%ifequal request.user.username user.username%}
+						<td>
+						<form  action="" method = "POST">
+							{% csrf_token %}
+							<input  value = "Delete"  name = "{{remark_item.remark_name}}" class="btn" type="submit">
+						</form>
+						</td>
+						{%endifequal%}
+						
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span6">
+			<h3>
+				Favorites
+			</h3>
+			
+			
+			<table class="table">
+
+				<thead>
+					<tr>
+						<th>
+							Book
+						</th>
+						{%ifequal request.user.username user.username%}
+						<th>
+							Operation
+						</th>
+						{%endifequal%}
+
+					</tr>
+				</thead>
+				<tbody>
+				{%for favorite_item in favorite_list%}
+					{%if forloop.counter|divisibleby:2%}
+					<tr class="success">
+					{%else%}
+					<tr class="info">
+					{%endif%}
+						<td><a href="/book/{{favorite_item.book_id}}">
+							{{favorite_item.book_name}}</a>
+						</td>
+						{%ifequal request.user.username user.username%}
+						<td>
+						<form  action="" method = "POST">
+						{% csrf_token %}
+							<input  value = "Delete"  name = "{{favorite_item.book_id}}" class="btn" type="submit">
+						</form>
+						</td>
+						{%endifequal%}
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			
+		</div>
+		<div class="span6">
+			<h3>
+				Articles
+			</h3>
+			
+			
+			<table class="table">
+
+				<thead>
+					<tr>
+						<th>
+							Article
+						</th>
+						{%ifequal request.user.username user.username%}
+						<th>
+							Operation
+						</th>
+						{%endifequal%}
+
+					</tr>
+				</thead>
+				<tbody>
+				{%for article_item in article_list%}
+					{%if forloop.counter|divisibleby:2%}
+					<tr class="success">
+					{%else%}
+					<tr class="info">
+					{%endif%}
+						<td><a href="/article/{{article_item.article_id}}">
+							{{article_item.article_name}}</a>
+						</td>
+						{%ifequal request.user.username user.username%}
+						<td>
+						<form  action="" method = "POST">
+						{% csrf_token %}
+							<input  value = "Delete"  name = "{{article_item.article_name}}" class="btn" type="submit">
+						</form>
+						</td>
+						{%endifequal%}
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span6">
+			<h3>
+				Group Joined
+			</h3>
+			
+			
+			<table class="table">
+
+				<thead>
+					<tr>
+						<th>
+							Group
+						</th>
+						{%ifequal request.user.username user.username%}
+						<th>
+							Operation
+						</th>
+						{%endifequal%}
+
+					</tr>
+				</thead>
+				<tbody>
+				{%for group_item in group_list%}
+					{%if forloop.counter|divisibleby:2%}
+					<tr class="success">
+					{%else%}
+					<tr class="info">
+					{%endif%}
+						<td><a href="/group/{{group_item.group_id}}">
+							{{group_item.group_name}}</a>
+						</td>
+						{%ifequal request.user.username user.username%}
+						<td>
+						<form  action="" method = "POST">
+						{% csrf_token %}
+							<input  value = "Delete"  name = "group{{group_item.group_id}}" class="btn" type="submit">
+						</form>
+						</td>
+						{%endifequal%}
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			
+		</div>
+		<div class="span6">
+		{%ifequal request.user.username user.username%}
+			<form role="form" action="" method="POST">
+			{% csrf_token %}
+				 <div class="form-group">
+	  				<legend>Create Your Group</legend> <label>Group Name：</label>
+					<p>
+						<input name = "group" type="text"  minlength="1" maxlength="20" required="required"  />
+					</p>
+	  				<p>
+						<input  value = "Submit"  name = "create_group" class="btn" type="submit">
+
+					</p>
+					{%if remit_error%}
+					<p>
+						You have blank should be written.
+					</p>
+					{%endif%}
+ 				</div>
+			</form>
+			{%endifequal%}
+			<h3>
+				Group Builded By Me
+			</h3>
+			
+			
+			<table class="table">
+
+				<thead>
+					<tr>
+						<th>
+							Group
+						</th>
+						{%ifequal request.user.username user.username%}
+						<th>
+							Operation
+						</th>
+						{%endifequal%}
+
+					</tr>
+				</thead>
+				<tbody>
+				{%for manager_item in manager_list%}
+					{%if forloop.counter|divisibleby:2%}
+					<tr class="success">
+					{%else%}
+					<tr class="info">
+					{%endif%}
+						<td><a href="/group/{{manager_item.group_id}}">
+							{{manager_item.group_name}}</a>
+						</td>
+						{%ifequal request.user.username user.username%}
+						<td>
+						<form  action="" method = "POST">
+						{% csrf_token %}
+							<input  value = "Delete"  name = "manager{{manager_item.group_id}}" class="btn" type="submit">
+						</form>
+						</td>
+						{%endifequal%}
+					</tr>
+					{%endfor%}
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+{%endblock%}

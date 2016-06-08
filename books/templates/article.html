@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+	{% block content %}
+	<div class="row-fluid">
+		<div class="span12">
+			<blockquote>
+				<p>
+					{{article.article_title}}
+				</p> 
+			</blockquote>
+			<ul>
+				<li><a href="/group/{{article.group_id}}">
+					Group:{{article.group_name}}</a>
+				</li>
+				<li>
+					Date Time:{{article.article_date}}
+				</li>
+				<li>
+					Author:{{article.author_name}}
+				</li>
+			</ul>
+			<dl>
+			
+				<dd>
+					{{article.article_content}}
+				</dd>
+			</dl>
+		</div>
+	</div>
+{%endblock%}
